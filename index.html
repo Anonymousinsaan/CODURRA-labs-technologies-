@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codurra Labs & Technologies</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <nav id="navbar" class="navbar">
+    <div class="container navbar-container">
+      <div class="logo-container" onclick="scrollToSection('hero')">
+        <img src="logo.svg" alt="Codurra Labs & Technologies Logo" class="logo" />
+        <span class="logo-text">Codurra Labs & Technologies</span>
+      </div>
+      <ul class="nav-links">
+        <li><button onclick="scrollToSection('about')">About Us</button></li>
+        <li><button onclick="scrollToSection('technologies')">Technologies</button></li>
+        <li><button onclick="scrollToSection('projects')">Projects</button></li>
+        <li><button onclick="scrollToSection('contact')">Contact</button></li>
+        <li>
+          <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
+        </li>
+      </ul>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">☰</button>
+    </div>
+    <ul id="mobileMenu" class="mobile-menu hidden">
+      <li><button onclick="scrollToSection('about')">About Us</button></li>
+      <li><button onclick="scrollToSection('technologies')">Technologies</button></li>
+      <li><button onclick="scrollToSection('projects')">Projects</button></li>
+      <li><button onclick="scrollToSection('contact')">Contact</button></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="hero" class="hero-section">
+      <div class="background-gradient"></div>
+      <img src="CODURRAlogo.png" alt="Codurra Labs Logo" width="200" />
+>
+      <h1 class="hero-title">Innovating Beyond Boundaries</h1>
+      <button class="hero-cta" onclick="scrollToSection('about')">Explore Codurra</button>
+    </section>
+
+    <section id="about" class="section about-section">
+      <h2>About Us</h2>
+      <p>
+        Codurra Labs & Technologies pioneers next-gen AI, software, and tools for creators and
+        businesses worldwide.
+      </p>
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        <ul>
+          <li>
+            <span class="year">2018</span>
+            <p>Founded Codurra Labs & Technologies</p>
+          </li>
+          <li>
+            <span class="year">2019</span>
+            <p>Launched AI chatbot platform</p>
+          </li>
+          <li>
+            <span class="year">2021</span>
+            <p>Expanded into cloud infrastructure solutions</p>
+          </li>
+          <li>
+            <span class="year">2023</span>
+            <p>Integrated blockchain tech in future labs</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="technologies" class="section tech-section">
+      <h2>Our Technologies</h2>
+      <div class="tech-grid">
+        <div class="tech-card" tabindex="0" aria-label="AI Solutions">
+          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.21 1.79 4 4 4v3.14a4.002 4.002 0 101.83 7.54h2.34A4.004 4.004 0 1016 15v-2a4 4 0 10-4-12z"/></svg>
+          <h3>AI Solutions</h3>
+        </div>
+        <div class="tech-card" tabindex="0" aria-label="Blockchain">
+          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M7 2v4H3v4H1v6h2v4h4v-4h10v4h4v-4h2v-6h-2V6h-4V2H7zm12 8v10h-4v-4H9v4H5v-4H3l-.002-10h16z"/></svg>
+          <h3>Blockchain</h3>
+        </div>
+        <div class="tech-card" tabindex="0" aria-label="Cloud Systems">
+          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M6 10c-2.2 0-4 1.8-4 4a4 4 0 008 0h7c1.65 0 3-1.35 3-3 0-1.04-.51-1.92-1.28-2.5a4.975 4.975 0 00-9.1 1.5z"/></svg>
+          <h3>Cloud Systems</h3>
+        </div>
+        <div class="tech-card" tabindex="0" aria-label="Future Labs">
+          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M12 2C7 2 2 6.48 2 12s5 10 10 10 10-4.48 10-10S17 2 12 2z"/></svg>
+          <h3>Future Labs</h3>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects-section">
+      <h2>Projects & Innovations</h2>
+      <div class="projects-grid">
+        <article class="project-card" tabindex="0">
+          <h3>AI Research Platform</h3>
+          <p>Custom AI model development platform.</p>
+        </article>
+        <article class="project-card" tabindex="0">
+          <h3>Cloud Infrastructure</h3>
+          <p>Scalable cloud solutions for startups.</p>
+        </article>
+        <article class="project-card" tabindex="0">
+          <h3>Decentralized Marketplace</h3>
+          <p>Secure blockchain trading system.</p>
+        </article>
+        <article class="project-card" tabindex="0">
+          <h3>Innovative R&D Lab</h3>
+          <p>Experimental AI and quantum computing.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <h2>Contact & Collaboration</h2>
+      <form id="contactForm" class="contact-form" novalidate>
+        <input type="text" id="name" name="name" placeholder="Your Name" required />
+        <input type="email" id="email" name="email" placeholder="Your Email" required />
+        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formMessage" class="form-message" aria-live="polite"></p>
+      <div class="social-links" aria-label="Social Media Links">
+        <a href="mailto:contact@codurralabs.com" aria-label="Email" target="_blank" rel="noreferrer noopener">
+          ✉️
+        </a>
+        <a href="#" aria-label="LinkedIn" target="_blank" rel="noreferrer noopener">
+          💼
+        </a>
+        <a href="#" aria-label="Twitter" target="_blank" rel="noreferrer noopener">
+          🐦
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-container">
+      <p>© 2025 Codurra Labs & Technologies. All rights reserved.</p>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#technologies">Technologies</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="neon-line"></div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
