@@ -1,95 +1,88 @@
-// Smooth scroll to section
+// Smooth scroll helper with navbar offset
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
-  const offset = 70; // navbar height approx
-  const bodyRect = document.body.getBoundingClientRect().top;
-  const elRect = el.getBoundingClientRect().top;
-  const elPosition = elRect - bodyRect;
-  const offsetPosition = elPosition - offset;
 
-  window.scrollTo({
-    top: offsetPosition,
-    behavior: "smooth",
-  });
+  const navHeight = document.querySelector('nav').offsetHeight || 70;
+  const destination = el.getBoundingClientRect().top + window.pageYOffset - navHeight - 8;
+
+  window.scrollTo({ top: destination, behavior: 'smooth' });
 
   // Close mobile menu if open
-  hideMobileMenu();
+  if (navMenu.classList.contains('show')) {
+    navMenu.classList.remove('show');
+    mobileBtn.setAttribute('aria-expanded', 'false');
+  }
 }
 
-// Dark mode toggle
-const darkModeToggle = document.getElementById("darkModeToggle");
-darkModeToggle.addEventListener("click", () => {
-  document.documentElement.classList.toggle("dark");
-  if (document.documentElement.classList.contains("dark")) {
-    localStorage.setItem("theme", "dark");
-    darkModeToggle.textContent = ☀️";
+// Dark mode toggle with localStorage persistence
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('click', () => {
+  const root = document.documentElement;
+  if (root.classList.contains('dark')) {
+    root.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    darkModeToggle.textContent = '🌙';
   } else {
-    localStorage.setItem("theme", "light");
-    darkModeToggle.textContent = "🌙";
+    root.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    darkModeToggle.textContent = '☀️';
   }
 });
 
-// Load theme preference
-window.addEventListener("load", () => {
-  if (localStorage.getItem("theme") === "dark") {
-    document.documentElement.classList.add("dark");
-    darkModeToggle.textContent = "☀️";
+// Load saved theme on page load
+window.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+    darkModeToggle.textContent = '☀️';
   } else {
-    document.documentElement.classList.remove("dark");
-    darkModeToggle.textContent = "🌙";
+    document.documentElement.classList.remove('dark');
+    darkModeToggle.textContent = '🌙';
+  }
+});
+
+// Navbar scroll effect
+const navbar = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 30) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
   }
 });
 
 // Mobile menu toggle
-const mobileToggleBtn = document.getElementById("mobileMenuToggle");
-const mobileMenu = document.getElementById("mobileMenu");
+const mobileBtn = document.getElementById('mobileMenuBtn');
+const navMenu = document.querySelector('ul.nav-menu');
 
-mobileToggleBtn.addEventListener("click", () => {
-  mobileMenu.classList.toggle("show");
+mobileBtn.addEventListener('click', () => {
+  const expanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+  mobileBtn.setAttribute('aria-expanded', String(!expanded));
+  navMenu.classList.toggle('show');
 });
 
-// Hide mobile menu on link click
-function hideMobileMenu() {
-  if (mobileMenu.classList.contains("show")) {
-    mobileMenu.classList.remove("show");
-  }
-}
+// Contact form submission simulation
+const contactForm = document.getElementById('contactForm');
+const formMessage = document.getElementById('formMessage');
 
-// Contact Form submission simulation
-const contactForm = document.getElementById("contactForm");
-const formMessage = document.getElementById("formMessage");
-
-contactForm.addEventListener("submit", (e) => {
+contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Simple validation (HTML5 also ensures this)
   if (
     !contactForm.name.value.trim() ||
     !contactForm.email.value.trim() ||
     !contactForm.message.value.trim()
   ) {
-    formMessage.textContent = "Please fill all fields.";
-    formMessage.style.color = "red";
+    formMessage.style.color = '#D66A6A';
+    formMessage.textContent = 'Please fill in all fields.';
     return;
   }
 
-  formMessage.style.color = ""; // reset
-  formMessage.textContent = "Sending message...";
+  formMessage.style.color = '#7C9ED9';
+  formMessage.textContent = 'Sending message...';
 
   setTimeout(() => {
-    formMessage.textContent = "Thanks for reaching out! We'll get back to you soon.";
+    formMessage.textContent = "Thank you! We'll get back to you soon.";
     contactForm.reset();
-  }, 1500);
-});
-
-// Navbar background change on scroll
-const navbar = document.getElementById("navbar");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 30) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
+  }, 1800);
 });

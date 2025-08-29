@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explore Codurra | Codurra Labs & Technologies</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-left" tabindex="0" role="button" aria-label="Go to homepage" onclick="location.href='index.html'" onkeypress="if(event.key==='Enter'){location.href='index.html'}" >
+      <img src="C:/Anonymousinsaan/CODURRA labs & technogies/CODURRAlogo.png.png" alt="Codurra Labs & Technologies Logo" draggable="false" />
+      <span>Codurra Labs & Technologies</span>
+    </div>
+    <ul class="nav-menu" role="menubar">
+      <li role="none"><button role="menuitem" onclick="location.href='index.html#about'">About Us</button></li>
+      <li role="none"><button role="menuitem" onclick="location.href='index.html#technologies'">Technologies</button></li>
+      <li role="none"><button role="menuitem" onclick="location.href='index.html#projects'">Projects</button></li>
+      <li role="none"><button role="menuitem" onclick="location.href='index.html#contact'">Contact</button></li>
+    </ul>
+    <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button id="mobileMenuBtn" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
+  </nav>
+
+  <main>
+    <header class="hero" style="height: 60vh; padding: 2rem 1.5rem;">
+      <h1 class="hero-tagline" style="font-size: 2.8rem; max-width: 960px; margin: 0 auto;">
+        Building the Future with AI & Innovation
+      </h1>
+      <p style="color: #8791A3; font-weight: 500; max-width: 720px; margin: 1rem auto 3rem; font-size: 1.15rem; text-align: center;">
+        Welcome to Codurra Labs & Technologies – pioneers in cutting-edge AI, software, and research for creators and businesses worldwide.
+      </p>
+      <a href="#services" class="cta-button" style="display: block; width: max-content; margin: 0 auto;">
+        Discover Our Services
+      </a>
+    </header>
+
+    <section id="services" role="region" aria-labelledby="servicesTitle">
+      <h2 id="servicesTitle">Our Services</h2>
+      <div class="technologies-grid" style="max-width: 1000px; margin: 2rem auto;">
+        <div class="tech-card" tabindex="0" role="listitem" aria-label="AI Solutions">
+          <div class="tech-icon" aria-hidden="true">🤖</div>
+          <div class="tech-label">AI Solutions</div>
+          <p style="margin-top: 0.6rem; color: #a1aabf; font-weight: 500;">Custom AI tools, chatbots, and automation designed for impact.</p>
+        </div>
+        <div class="tech-card" tabindex="0" role="listitem" aria-label="Web & App Development">
+          <div class="tech-icon" aria-hidden="true">💻</div>
+          <div class="tech-label">Web & App Development</div>
+          <p style="margin-top: 0.6rem; color: #a1aabf; font-weight: 500;">Modern interfaces and robust applications for versatile platforms.</p>
+        </div>
+        <div class="tech-card" tabindex="0" role="listitem" aria-label="Cloud & Scalable Infrastructure">
+          <div class="tech-icon" aria-hidden="true">☁️</div>
+          <div class="tech-label">Cloud & Scalable Infrastructure</div>
+          <p style="margin-top: 0.6rem; color: #a1aabf; font-weight: 500;">Reliable and flexible cloud solutions to grow your business.</p>
+        </div>
+        <div class="tech-card" tabindex="0" role="listitem" aria-label="R&D and Future Labs">
+          <div class="tech-icon" aria-hidden="true">🔬</div>
+          <div class="tech-label">R&D and Future Labs</div>
+          <p style="margin-top: 0.6rem; color: #a1aabf; font-weight: 500;">Innovative research pushing the boundaries of technology.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" role="region" aria-labelledby="projectsTitle" style="margin-top: 4rem;">
+      <h2 id="projectsTitle">Latest Projects</h2>
+      <div class="projects-grid" style="max-width: 1080px; margin: 2rem auto 5rem;">
+        <article class="project-card" tabindex="0" role="listitem" aria-label="AI Research Platform Project">
+          <h3>AI Research Platform</h3>
+          <p>Revolutionizing how data powers AI models.</p>
+        </article>
+        <article class="project-card" tabindex="0" role="listitem" aria-label="Blockchain Marketplace Project">
+          <h3>Blockchain Marketplace</h3>
+          <p>Secure decentralized trading platform.</p>
+        </article>
+        <article class="project-card" tabindex="0" role="listitem" aria-label="Cloud Optimization Project">
+          <h3>Cloud Optimization</h3>
+          <p>Efficient resource scaling for startups and enterprises.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" role="region" aria-labelledby="contactTitle">
+      <h2 id="contactTitle">Get in Touch</h2>
+      <form id="contactForm" class="contact-section" novalidate>
+        <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your name" />
+        <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your email" />
+        <textarea id="message" name="message" placeholder="Your Message" rows="5" required aria-label="Your message"></textarea>
+        <button type="submit" aria-label="Send message">Send Message</button>
+        <p id="formMessage" class="form-message" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Codurra Labs & Technologies. All rights reserved.</p>
+    <nav aria-label="Footer navigation">
+      <a href="index.html#about">About</a>
+      <a href="index.html#technologies">Technologies</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

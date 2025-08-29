@@ -4,156 +4,717 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Codurra Labs & Technologies</title>
-  <link rel="stylesheet" href="style.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;900&display=swap"
-    rel="stylesheet"
-  />
+  <style>
+    /* ===== BASIC RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    html, body {
+      height: 100%; width: 100%;
+      font-family: "Montserrat", sans-serif;
+      background: #181A1F;
+      color: #BFC4C9;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: #738199;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #92A1B0;
+      outline: none;
+    }
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: #BFC4C9;
+      transition: color 0.3s ease;
+    }
+    button:hover,
+    button:focus {
+      color: #92A1B0;
+      outline: none;
+    }
+
+    /* ========== NAVBAR ========== */
+    nav {
+      background: rgba(24, 26, 31, 0.75);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      z-index: 999;
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid #3D4451;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      user-select: none;
+      transition: background-color 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(24, 26, 31, 0.95);
+      box-shadow: 0 2px 20px rgb(18 22 30 / 0.39);
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
+    .nav-left img {
+      height: 42px;
+      width: 42px;
+      object-fit: contain;
+      border-radius: 6px;
+      filter: drop-shadow(0 0 6px rgba(40, 69, 107, 0.6));
+      transition: transform 0.35s ease;
+    }
+    .nav-left:hover img {
+      transform: scale(1.1);
+    }
+    .nav-left span {
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #A7ABB5;
+      user-select: text;
+      letter-spacing: 0.05rem;
+    }
+    ul.nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    ul.nav-menu li > button {
+      font-weight: 600;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #A7ABB5;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.2rem;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      user-select: none;
+    }
+    ul.nav-menu li > button:hover,
+    ul.nav-menu li > button:focus {
+      color: #A9B5D1;
+      border-bottom: 2px solid #A9B5D1;
+      outline: none;
+    }
+    /* Dark mode toggle */
+    #darkModeToggle {
+      font-size: 1.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      color: #A7ABB5;
+      transition: color 0.3s ease;
+      padding-bottom: 0.25rem;
+    }
+    #darkModeToggle:hover {
+      color: #A9B5D1;
+    }
+
+    /* MOBILE MENU TOGGLE - hidden on desktop */
+    #mobileMenuBtn {
+      display: none;
+      font-size: 1.8rem;
+      color: #A7ABB5;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 3px;
+      transition: color 0.3s ease;
+    }
+    #mobileMenuBtn:hover {
+      color: #A9B5D1;
+    }
+
+    /* ===== HERO SECTION ===== */
+    header.hero {
+      height: 100vh;
+      background:
+        linear-gradient(135deg, #222933 0%, #12161E 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1.5rem;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+    /* subtle moving gradient background */
+    header.hero::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 30% 30%, #385377 25%, transparent 40%),
+        radial-gradient(circle at 70% 70%, #243a5a 45%, transparent 60%);
+      animation: subtleFlow 30s linear infinite;
+      opacity: 0.15;
+      z-index: 0;
+      pointer-events: none;
+    }
+    @keyframes subtleFlow {
+      0% { transform: translate(0, 0) }
+      50% { transform: translate(10%, 5%) }
+      100% { transform: translate(0, 0) }
+    }
+    header.hero img.hero-logo {
+      position: relative;
+      height: 130px;
+      width: 130px;
+      margin-bottom: 1.5rem;
+      z-index: 10;
+      box-shadow:
+        0 0 14px rgba(66, 93, 143, 0.7),
+        0 0 28px rgba(66, 93, 143, 0.4);
+      border-radius: 10px;
+      user-select: none;
+      transition: transform 0.6s ease;
+    }
+    header.hero img.hero-logo:hover {
+      transform: rotate(8deg) scale(1.1);
+      box-shadow:
+        0 0 22px rgba(66, 93, 143, 0.9),
+        0 0 48px rgba(66, 93, 143, 0.6);
+    }
+    header.hero h1.hero-tagline {
+      font-weight: 900;
+      font-size: 3rem;
+      max-width: 800px;
+      color: #C1C6CD;
+      text-shadow: 0 0 10px rgba(49, 72, 110, 0.9);
+      margin-bottom: 2rem;
+      user-select: text;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    header.hero button.cta-button {
+      cursor: pointer;
+      padding: 0.9rem 3.8rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #7184a2, #455b7d);
+      border: none;
+      color: #E6E8EC;
+      box-shadow:
+        0 0 6px #455b7d,
+        0 4px 14px #2d3f61;
+      transition:
+        background 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.25s ease;
+      user-select: none;
+      animation: fadeInUp 1.5s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      outline-offset: 3px;
+    }
+    header.hero button.cta-button:hover,
+    header.hero button.cta-button:focus {
+      background: linear-gradient(135deg, #5d6d8d, #2e3f63);
+      box-shadow:
+        0 0 10px #2e3f63,
+        0 0 24px #1a284b;
+      transform: scale(1.08);
+      outline: none;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== SECTIONS COMMON STYLES ===== */
+    section {
+      max-width: 1100px;
+      margin: 6rem auto;
+      padding: 0 1.5rem;
+      user-select: text;
+    }
+
+    section h2 {
+      font-weight: 900;
+      font-size: 2.7rem;
+      color: #BCC2CA;
+      margin-bottom: 1.8rem;
+      user-select: text;
+    }
+    section p {
+      font-size: 1.15rem;
+      max-width: 650px;
+      color: #939AA2;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+      user-select: text;
+    }
+
+    /* ===== ABOUT US TIMELINE ===== */
+    .timeline {
+      position: relative;
+      padding-left: 3.8rem;
+      border-left: 3px solid #4a5672;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .timeline > div {
+      position: relative;
+      padding-left: 4.5rem;
+      margin-bottom: 4rem;
+    }
+    .timeline > div::before {
+      content: attr(data-year);
+      position: absolute;
+      left: -4.5rem;
+      top: 0;
+      font-weight: 900;
+      font-size: 1.1rem;
+      background: #304361;
+      border-radius: 18px;
+      padding: 0.3rem 1rem;
+      color: #9AA3B3;
+      user-select: text;
+      box-shadow: 0 0 6px rgba(27,42,69,0.8);
+    }
+    .timeline > div p {
+      color: #ABB3C3;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    /* ===== TECHNOLOGIES GRID ===== */
+    .technologies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 3rem auto 0;
+    }
+    .tech-card {
+      background: #1E2330;
+      border-radius: 20px;
+      padding: 2.5rem 1.8rem;
+      text-align: center;
+      color: #8791A3;
+      box-shadow: 0 0 14px #28385750;
+      cursor: default;
+      user-select: none;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.7s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .tech-card:hover,
+    .tech-card:focus {
+      transform: scale(1.05);
+      box-shadow: 0 0 36px rgba(33, 54, 96, 0.8);
+      outline: none;
+    }
+    .tech-icon {
+      font-size: 48px;
+      margin-bottom: 1rem;
+      color: #7A8CAC;
+      filter: drop-shadow(0 0 7px #5F738B);
+      user-select: none;
+      transition: filter 0.4s ease;
+    }
+    .tech-card:hover .tech-icon,
+    .tech-card:focus .tech-icon {
+      filter: drop-shadow(0 0 14px #7A97C9);
+    }
+    .tech-label {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #BFC4C9;
+      user-select: text;
+    }
+
+    /* ===== PROJECTS GRID ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .project-card {
+      background: #1E2330;
+      border-radius: 18px;
+      padding: 2rem;
+      color: #9BA1B4;
+      box-shadow: 0 0 20px rgba(40, 60, 95, 0.18);
+      cursor: pointer;
+      user-select: none;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      justify-content: center;
+      outline-offset: 6px;
+    }
+    .project-card:hover,
+    .project-card:focus {
+      box-shadow: 0 0 40px rgba(46, 67, 110, 0.7);
+      transform: translateY(-8px);
+      outline: none;
+    }
+    .project-card h3 {
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #C0C6D6;
+      user-select: text;
+    }
+    .project-card p {
+      font-size: 1rem;
+      color: #8D92A3;
+      line-height: 1.45;
+      user-select: text;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-section {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+      user-select: text;
+    }
+    .contact-section input,
+    .contact-section textarea {
+      padding: 1rem 1.1rem;
+      font-size: 1rem;
+      background: #252B39;
+      border-radius: 12px;
+      border: 2px solid rgba(180, 190, 218, 0.2);
+      color: #BDC3DC;
+      resize: none;
+      transition: border-color 0.25s ease;
+      font-family: "Montserrat", sans-serif;
+      user-select: text;
+    }
+    .contact-section input::placeholder,
+    .contact-section textarea::placeholder {
+      color: #8992AB;
+    }
+    .contact-section input:focus,
+    .contact-section textarea:focus {
+      outline: none;
+      border-color: #4a6ba5;
+      box-shadow: 0 0 12px #495c8a50;
+    }
+    .contact-section button {
+      background: linear-gradient(130deg, #486ca5, #375282);
+      padding: 1.2rem 0;
+      font-size: 1.15rem;
+      border-radius: 999px;
+      color: #dfe5f4;
+      font-weight: 700;
+      box-shadow: 0 0 14px #375282a3;
+      transition: background 0.4s ease, box-shadow 0.4s ease;
+      user-select: none;
+      cursor: pointer;
+      border: none;
+    }
+    .contact-section button:hover,
+    .contact-section button:focus {
+      background: linear-gradient(130deg, #375282, #2b466d);
+      box-shadow: 0 0 28px #2b4671c7;
+      outline: none;
+    }
+    .form-message {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #6b8bc1;
+      min-height: 1.4rem;
+      user-select: text;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1A1D24;
+      border-top: 1px solid #3F4B6E;
+      padding: 2rem 1.5rem 2.5rem;
+      text-align: center;
+      user-select: none;
+      color: #7E879D;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    footer p {
+      margin-bottom: 1rem;
+      user-select: text;
+    }
+    footer nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    footer nav a {
+      color: #7E879D;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer nav a:hover,
+    footer nav a:focus {
+      color: #94A0BB;
+      outline: none;
+    }
+
+    /* Neon horizontal animated gradient line */
+    footer::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(
+        270deg,
+        transparent,
+        #324b82,
+        #5875c7,
+        #324b82,
+        transparent
+      );
+      background-size: 600% 100%;
+      animation: footerNeonSlide 5s linear infinite;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    @keyframes footerNeonSlide {
+      from {
+        background-position: 0% 0%;
+      }
+      to {
+        background-position: 600% 0%;
+      }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px) {
+      ul.nav-menu {
+        display: none;
+      }
+      #mobileMenuBtn {
+        display: block;
+      }
+    }
+    @media (max-width: 650px) {
+      header.hero h1.hero-tagline {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <nav id="navbar" class="navbar">
-    <div class="container navbar-container">
-      <div class="logo-container" onclick="scrollToSection('hero')">
-        <img src="logo.svg" alt="Codurra Labs & Technologies Logo" class="logo" />
-        <span class="logo-text">Codurra Labs & Technologies</span>
-      </div>
-      <ul class="nav-links">
-        <li><button onclick="scrollToSection('about')">About Us</button></li>
-        <li><button onclick="scrollToSection('technologies')">Technologies</button></li>
-        <li><button onclick="scrollToSection('projects')">Projects</button></li>
-        <li><button onclick="scrollToSection('contact')">Contact</button></li>
-        <li>
-          <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
-        </li>
-      </ul>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle Menu">☰</button>
+  <nav id="navbar">
+    <div class="nav-left" tabindex="0" role="button" aria-label="Go to homepage" onclick="scrollToSection('hero')" onkeypress="if(event.key==='Enter'){scrollToSection('hero')}" >
+      <img src="C:/Anonymousinsaan/CODURRA labs & technogies/CODURRAlogo.png.png" alt="Codurra Labs & Technologies Logo" draggable="false" />
+      <span>Codurra Labs & Technologies</span>
     </div>
-    <ul id="mobileMenu" class="mobile-menu hidden">
-      <li><button onclick="scrollToSection('about')">About Us</button></li>
-      <li><button onclick="scrollToSection('technologies')">Technologies</button></li>
-      <li><button onclick="scrollToSection('projects')">Projects</button></li>
-      <li><button onclick="scrollToSection('contact')">Contact</button></li>
+    <ul class="nav-menu" role="menubar">
+      <li role="none"><button role="menuitem" onclick="scrollToSection('about')">About Us</button></li>
+      <li role="none"><button role="menuitem" onclick="scrollToSection('technologies')">Technologies</button></li>
+      <li role="none"><button role="menuitem" onclick="scrollToSection('projects')">Projects</button></li>
+      <li role="none"><button role="menuitem" onclick="scrollToSection('contact')">Contact</button></li>
     </ul>
+    <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button id="mobileMenuBtn" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
   </nav>
 
-  <main>
-    <section id="hero" class="hero-section">
-      <div class="background-gradient"></div>
-      <img src="CODURRAlogo.png" alt="Codurra Labs Logo" width="200" />
->
-      <h1 class="hero-title">Innovating Beyond Boundaries</h1>
-      <button class="hero-cta" onclick="scrollToSection('about')">Explore Codurra</button>
-    </section>
+  <header class="hero" id="hero" role="banner" aria-label="Hero">
+    <img src="C:/Anonymousinsaan/CODURRA labs & technogies/CODURRAlogo.png.png" alt="Codurra Labs Logo" class="hero-logo" draggable="false"/>
+    <h1 class="hero-tagline">Innovating Beyond Boundaries</h1>
+    <button class="cta-button" onclick="location.href='C:/Anonymousinsaan/CODURRA labs & technogies/explore.html'">Explore Codurra</button>
+  </header>
 
-    <section id="about" class="section about-section">
-      <h2>About Us</h2>
-      <p>
-        Codurra Labs & Technologies pioneers next-gen AI, software, and tools for creators and
-        businesses worldwide.
-      </p>
-      <div class="timeline">
-        <div class="timeline-line"></div>
-        <ul>
-          <li>
-            <span class="year">2018</span>
-            <p>Founded Codurra Labs & Technologies</p>
-          </li>
-          <li>
-            <span class="year">2019</span>
-            <p>Launched AI chatbot platform</p>
-          </li>
-          <li>
-            <span class="year">2021</span>
-            <p>Expanded into cloud infrastructure solutions</p>
-          </li>
-          <li>
-            <span class="year">2023</span>
-            <p>Integrated blockchain tech in future labs</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="technologies" class="section tech-section">
-      <h2>Our Technologies</h2>
-      <div class="tech-grid">
-        <div class="tech-card" tabindex="0" aria-label="AI Solutions">
-          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 2.21 1.79 4 4 4v3.14a4.002 4.002 0 101.83 7.54h2.34A4.004 4.004 0 1016 15v-2a4 4 0 10-4-12z"/></svg>
-          <h3>AI Solutions</h3>
-        </div>
-        <div class="tech-card" tabindex="0" aria-label="Blockchain">
-          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M7 2v4H3v4H1v6h2v4h4v-4h10v4h4v-4h2v-6h-2V6h-4V2H7zm12 8v10h-4v-4H9v4H5v-4H3l-.002-10h16z"/></svg>
-          <h3>Blockchain</h3>
-        </div>
-        <div class="tech-card" tabindex="0" aria-label="Cloud Systems">
-          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M6 10c-2.2 0-4 1.8-4 4a4 4 0 008 0h7c1.65 0 3-1.35 3-3 0-1.04-.51-1.92-1.28-2.5a4.975 4.975 0 00-9.1 1.5z"/></svg>
-          <h3>Cloud Systems</h3>
-        </div>
-        <div class="tech-card" tabindex="0" aria-label="Future Labs">
-          <svg class="tech-icon" xmlns="http://www.w3.org/2000/svg" fill="#08f" viewBox="0 0 24 24"><path d="M12 2C7 2 2 6.48 2 12s5 10 10 10 10-4.48 10-10S17 2 12 2z"/></svg>
-          <h3>Future Labs</h3>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects" class="section projects-section">
-      <h2>Projects & Innovations</h2>
-      <div class="projects-grid">
-        <article class="project-card" tabindex="0">
-          <h3>AI Research Platform</h3>
-          <p>Custom AI model development platform.</p>
-        </article>
-        <article class="project-card" tabindex="0">
-          <h3>Cloud Infrastructure</h3>
-          <p>Scalable cloud solutions for startups.</p>
-        </article>
-        <article class="project-card" tabindex="0">
-          <h3>Decentralized Marketplace</h3>
-          <p>Secure blockchain trading system.</p>
-        </article>
-        <article class="project-card" tabindex="0">
-          <h3>Innovative R&D Lab</h3>
-          <p>Experimental AI and quantum computing.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="contact" class="section contact-section">
-      <h2>Contact & Collaboration</h2>
-      <form id="contactForm" class="contact-form" novalidate>
-        <input type="text" id="name" name="name" placeholder="Your Name" required />
-        <input type="email" id="email" name="email" placeholder="Your Email" required />
-        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-      <p id="formMessage" class="form-message" aria-live="polite"></p>
-      <div class="social-links" aria-label="Social Media Links">
-        <a href="mailto:contact@codurralabs.com" aria-label="Email" target="_blank" rel="noreferrer noopener">
-          ✉️
-        </a>
-        <a href="#" aria-label="LinkedIn" target="_blank" rel="noreferrer noopener">
-          💼
-        </a>
-        <a href="#" aria-label="Twitter" target="_blank" rel="noreferrer noopener">
-          🐦
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-container">
-      <p>© 2025 Codurra Labs & Technologies. All rights reserved.</p>
-      <nav class="footer-nav">
-        <a href="#about">About</a>
-        <a href="#technologies">Technologies</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
+  <section id="about" role="region" aria-labelledby="aboutTitle">
+    <h2 id="aboutTitle">About Us</h2>
+    <p>Codurra Labs & Technologies pioneers next-gen AI, software, and tools for creators and businesses worldwide.</p>
+    <div class="timeline" aria-label="Company timeline">
+      <div data-year="2018"><p>Founded Codurra Labs & Technologies</p></div>
+      <div data-year="2019"><p>Launched AI chatbot platform</p></div>
+      <div data-year="2021"><p>Expanded into cloud infrastructure solutions</p></div>
+      <div data-year="2023"><p>Integrated blockchain tech in future labs</p></div>
     </div>
-    <div class="neon-line"></div>
+  </section>
+
+  <section id="technologies" role="region" aria-labelledby="techTitle">
+    <h2 id="techTitle">Our Technologies</h2>
+    <div class="technologies-grid" role="list">
+      <div class="tech-card" tabindex="0" role="listitem" aria-label="AI Solutions">
+        <div class="tech-icon" aria-hidden="true">🤖</div>
+        <div class="tech-label">AI Solutions</div>
+      </div>
+      <div class="tech-card" tabindex="0" role="listitem" aria-label="Blockchain">
+        <div class="tech-icon" aria-hidden="true">⛓️</div>
+        <div class="tech-label">Blockchain</div>
+      </div>
+      <div class="tech-card" tabindex="0" role="listitem" aria-label="Cloud Systems">
+        <div class="tech-icon" aria-hidden="true">☁️</div>
+        <div class="tech-label">Cloud Systems</div>
+      </div>
+      <div class="tech-card" tabindex="0" role="listitem" aria-label="Future Labs">
+        <div class="tech-icon" aria-hidden="true">🧪</div>
+        <div class="tech-label">Future Labs</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" role="region" aria-labelledby="projectsTitle">
+    <h2 id="projectsTitle">Projects & Innovations</h2>
+    <div class="projects-grid" role="list">
+      <article class="project-card" tabindex="0" role="listitem" aria-label="AI Research Platform Project">
+        <h3>AI Research Platform</h3>
+        <p>Custom AI model development platform.</p>
+      </article>
+      <article class="project-card" tabindex="0" role="listitem" aria-label="Cloud Infrastructure Project">
+        <h3>Cloud Infrastructure</h3>
+        <p>Scalable cloud solutions for startups.</p>
+      </article>
+      <article class="project-card" tabindex="0" role="listitem" aria-label="Decentralized Marketplace Project">
+        <h3>Decentralized Marketplace</h3>
+        <p>Secure blockchain trading system.</p>
+      </article>
+      <article class="project-card" tabindex="0" role="listitem" aria-label="Innovative R&D Lab Project">
+        <h3>Innovative R&D Lab</h3>
+        <p>Experimental AI and quantum computing.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" role="region" aria-labelledby="contactTitle">
+    <h2 id="contactTitle">Contact & Collaboration</h2>
+    <form id="contactForm" class="contact-section" novalidate>
+      <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your name" />
+      <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your email" />
+      <textarea id="message" name="message" placeholder="Your Message" rows="5" required aria-label="Your message"></textarea>
+      <button type="submit" aria-label="Send message">Send Message</button>
+      <p id="formMessage" class="form-message" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Codurra Labs & Technologies. All rights reserved.</p>
+    <nav aria-label="Footer navigation">
+      <a href="#about">About</a>
+      <a href="#technologies">Technologies</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Smooth scroll helper
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const navHeight = document.querySelector('nav').offsetHeight || 70;
+      const offsetTop = el.getBoundingClientRect().top + window.pageYOffset - navHeight;
+
+      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+
+      // Close mobile menu if any
+      if (mobileMenu.classList.contains('show')) {
+        mobileMenu.classList.remove('show');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      if (root.classList.contains('dark')) {
+        root.classList.remove('dark');
+        darkModeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        root.classList.add('dark');
+        darkModeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // Load theme preference
+    window.addEventListener('DOMContentLoaded', () => {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        darkModeToggle.textContent = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        darkModeToggle.textContent = '🌙';
+      }
+    });
+
+    // Navbar background change on scroll
+    const navbar = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.querySelector('.nav-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
+      mobileMenuBtn.setAttribute('aria-expanded', !expanded);
+      mobileMenu.classList.toggle('show');
+    });
+
+    // Contact form handling
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!contactForm.name.value.trim() || !contactForm.email.value.trim() || !contactForm.message.value.trim()) {
+        formMessage.textContent = "Please fill in all fields.";
+        formMessage.style.color = "#D66A6A";
+        return;
+      }
+      formMessage.style.color = "#7C9ED9";
+      formMessage.textContent = "Sending message...";
+      setTimeout(() => {
+        formMessage.textContent = "Thank you! We'll get back to you soon.";
+        contactForm.reset();
+      }, 1800);
+    });
+  </script>
 </body>
 </html>
