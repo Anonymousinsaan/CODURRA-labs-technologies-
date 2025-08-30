@@ -231,6 +231,7 @@
       opacity: 0;
       transform: translateY(30px);
       outline-offset: 3px;
+      margin: 0.5rem;
     }
     header.hero button.cta-button:hover,
     header.hero button.cta-button:focus {
@@ -467,6 +468,7 @@
       color: #7E879D;
       font-size: 0.95rem;
       letter-spacing: 0.02em;
+      position: relative;
     }
     footer p {
       margin-bottom: 1rem;
@@ -538,13 +540,14 @@
 <body>
   <nav id="navbar">
     <div class="nav-left" tabindex="0" role="button" aria-label="Go to homepage" onclick="scrollToSection('hero')" onkeypress="if(event.key==='Enter'){scrollToSection('hero')}" >
-      <img src="C:/Anonymousinsaan/CODURRA labs & technogies/CODURRAlogo.png.png" alt="Codurra Labs & Technologies Logo" draggable="false" />
+      <img src="CODURRAlogo.png.png" alt="Codurra Labs & Technologies Logo" draggable="false" />
       <span>Codurra Labs & Technologies</span>
     </div>
     <ul class="nav-menu" role="menubar">
       <li role="none"><button role="menuitem" onclick="scrollToSection('about')">About Us</button></li>
       <li role="none"><button role="menuitem" onclick="scrollToSection('technologies')">Technologies</button></li>
       <li role="none"><button role="menuitem" onclick="scrollToSection('projects')">Projects</button></li>
+      <li role="none"><button role="menuitem" onclick="openIDE()" style="color: #7184a2; border-bottom-color: #7184a2;">🚀 IDE</button></li>
       <li role="none"><button role="menuitem" onclick="scrollToSection('contact')">Contact</button></li>
     </ul>
     <button id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
@@ -552,9 +555,12 @@
   </nav>
 
   <header class="hero" id="hero" role="banner" aria-label="Hero">
-    <img src="C:/Anonymousinsaan/CODURRA labs & technogies/CODURRAlogo.png.png" alt="Codurra Labs Logo" class="hero-logo" draggable="false"/>
+    <img src="CODURRAlogo.png.png" alt="Codurra Labs Logo" class="hero-logo" draggable="false"/>
     <h1 class="hero-tagline">Innovating Beyond Boundaries</h1>
-    <button class="cta-button" onclick="location.href='C:/Anonymousinsaan/CODURRA labs & technogies/explore.html'">Explore Codurra</button>
+    <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+      <button class="cta-button" onclick="location.href='explore.html'">Explore Codurra</button>
+      <button class="cta-button" onclick="openIDE()" style="background: linear-gradient(135deg, #58a6ff, #4338ca); box-shadow: 0 0 6px #4338ca, 0 4px 14px #312e81;">🚀 Launch IDE</button>
+    </div>
   </header>
 
   <section id="about" role="region" aria-labelledby="aboutTitle">
@@ -565,6 +571,7 @@
       <div data-year="2019"><p>Launched AI chatbot platform</p></div>
       <div data-year="2021"><p>Expanded into cloud infrastructure solutions</p></div>
       <div data-year="2023"><p>Integrated blockchain tech in future labs</p></div>
+      <div data-year="2024"><p>Released Codurra Nebuxia AI-powered IDE</p></div>
     </div>
   </section>
 
@@ -593,6 +600,10 @@
   <section id="projects" role="region" aria-labelledby="projectsTitle">
     <h2 id="projectsTitle">Projects & Innovations</h2>
     <div class="projects-grid" role="list">
+      <article class="project-card" tabindex="0" role="listitem" aria-label="Codurra Nebuxia IDE Project" onclick="openIDE()" style="border: 2px solid #4a6ba5;">
+        <h3>🚀 Codurra Nebuxia IDE</h3>
+        <p>AI-powered sovereign development environment with advanced code analysis.</p>
+      </article>
       <article class="project-card" tabindex="0" role="listitem" aria-label="AI Research Platform Project">
         <h3>AI Research Platform</h3>
         <p>Custom AI model development platform.</p>
@@ -604,10 +615,6 @@
       <article class="project-card" tabindex="0" role="listitem" aria-label="Decentralized Marketplace Project">
         <h3>Decentralized Marketplace</h3>
         <p>Secure blockchain trading system.</p>
-      </article>
-      <article class="project-card" tabindex="0" role="listitem" aria-label="Innovative R&D Lab Project">
-        <h3>Innovative R&D Lab</h3>
-        <p>Experimental AI and quantum computing.</p>
       </article>
     </div>
   </section>
@@ -634,6 +641,11 @@
   </footer>
 
   <script>
+    // Function to open IDE
+    function openIDE() {
+      window.open('../Codurra-Nebuxia-Sovereign-AI-Integrated-Development-Realm/index.html', '_blank');
+    }
+
     // Smooth scroll helper
     function scrollToSection(id) {
       const el = document.getElementById(id);
@@ -643,77 +655,87 @@
       const offsetTop = el.getBoundingClientRect().top + window.pageYOffset - navHeight;
 
       window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-
-      // Close mobile menu if any
-      if (mobileMenu.classList.contains('show')) {
-        mobileMenu.classList.remove('show');
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      }
     }
 
-    // Dark mode toggle
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    darkModeToggle.addEventListener('click', () => {
-      const root = document.documentElement;
-      if (root.classList.contains('dark')) {
-        root.classList.remove('dark');
-        darkModeToggle.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      } else {
-        root.classList.add('dark');
-        darkModeToggle.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Dark mode toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', function() {
+          const root = document.documentElement;
+          if (root.classList.contains('dark')) {
+            root.classList.remove('dark');
+            darkModeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+          } else {
+            root.classList.add('dark');
+            darkModeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+          }
+        });
       }
-    });
 
-    // Load theme preference
-    window.addEventListener('DOMContentLoaded', () => {
+      // Load theme preference
       if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.classList.add('dark');
-        darkModeToggle.textContent = '☀️';
+        if (darkModeToggle) darkModeToggle.textContent = '☀️';
       } else {
         document.documentElement.classList.remove('dark');
-        darkModeToggle.textContent = '🌙';
+        if (darkModeToggle) darkModeToggle.textContent = '🌙';
       }
-    });
 
-    // Navbar background change on scroll
-    const navbar = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 30) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+      // Navbar background change on scroll
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 30) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        });
       }
-    });
 
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.querySelector('.nav-menu');
-
-    mobileMenuBtn.addEventListener('click', () => {
-      const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true' || false;
-      mobileMenuBtn.setAttribute('aria-expanded', !expanded);
-      mobileMenu.classList.toggle('show');
-    });
-
-    // Contact form handling
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (!contactForm.name.value.trim() || !contactForm.email.value.trim() || !contactForm.message.value.trim()) {
-        formMessage.textContent = "Please fill in all fields.";
-        formMessage.style.color = "#D66A6A";
-        return;
+      // Mobile menu toggle
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.querySelector('ul.nav-menu');
+      
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', function() {
+          const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+          mobileMenuBtn.setAttribute('aria-expanded', String(!expanded));
+          mobileMenu.classList.toggle('show');
+        });
       }
-      formMessage.style.color = "#7C9ED9";
-      formMessage.textContent = "Sending message...";
-      setTimeout(() => {
-        formMessage.textContent = "Thank you! We'll get back to you soon.";
-        contactForm.reset();
-      }, 1800);
+
+      // Contact form handling
+      const contactForm = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+
+      if (contactForm && formMessage) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const nameField = contactForm.querySelector('#name');
+          const emailField = contactForm.querySelector('#email');
+          const messageField = contactForm.querySelector('#message');
+          
+          if (!nameField.value.trim() || !emailField.value.trim() || !messageField.value.trim()) {
+            formMessage.textContent = "Please fill in all fields.";
+            formMessage.style.color = "#D66A6A";
+            return;
+          }
+          
+          formMessage.style.color = "#7C9ED9";
+          formMessage.textContent = "Sending message...";
+          
+          setTimeout(function() {
+            formMessage.textContent = "Thank you! We'll get back to you soon.";
+            contactForm.reset();
+          }, 1800);
+        });
+      }
     });
   </script>
 </body>
